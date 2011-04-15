@@ -49,11 +49,11 @@ class Systeme{
 #		var_dump($query);
 		$res = '<table>
 					<tr>
-						<th>nom du produit</th><th>prix</th><th>quantie restante</th>
+						<th>nom du produit</th><th>quantie restante</th><th>prix</th>
 					</tr>'
 					;
 		while($row = mysql_fetch_assoc($query)){
-			$res .= '<tr><td>'.$row['nomproduit'].'</td><td>'.$row['prix'].'</td><td>'.$row['qterestante'].'</td></tr>';
+			$res .= '<tr><td>'.$row['nomproduit'].'</td><td>'.$row['qterestante'].'</td><td>'.$row['prix'].'</td><td><span class="imgPanier"></span></td></tr>';
 		}
 		$res .= '</table>';
 #		var_dump($res);
