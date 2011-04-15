@@ -9,20 +9,18 @@
 					<select id="selectClasse" name="selectClasse">
 						<option value=''>recherche globale</option>
 					<?php
-						$sys = unserialize($_SESSION['systeme']);
-#						var_dump($sys);
-						echo $sys->getClasse();
+						if(isset($_SESSION['systeme'])){
+							$sys = unserialize($_SESSION['systeme']);
+							echo $sys->getClasse();
+						}
 					?>
 					</select>
 				</div>
-				<div id="traitForm">
-					<input type="submit" value="envoyer"/>
-					<input type="reset" value="raz"/>
-				</div>
+				<input type="submit" value="envoyer"/>
+				<input type="reset" value="raz"/>
 			</form>
 			<?php 
-				if(!isset($_POST['parMot'])){
-					$_POST['parMot'] = '';
+				if(isset($_POST['parMot'])){
+					echo $sys->recherche($_POST['parMot'], $_POST['selectClasse']);
 				}
-				echo $sys->recherche($_POST['parMot'], $_POST['selectClasse']);
 			?>

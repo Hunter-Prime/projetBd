@@ -53,7 +53,7 @@ class Systeme{
 					</tr>'
 					;
 		while($row = mysql_fetch_assoc($query)){
-			$res .= '<tr><td>'.$row['nomproduit'].'</td><td>'.$row['qterestante'].'</td><td>'.$row['prix'].'</td><td><span class="imgPanier"></span></td></tr>';
+			$res .= '<tr><td>'.$row['nomproduit'].'</td><td>'.$row['qterestante'].'</td><td>'.$row['prix'].'</td><td><span class="imgPanier"><img src="./images/panier.jpg" alt="ajouter au panier"/></span></td></tr>';
 		}
 		$res .= '</table>';
 #		var_dump($res);

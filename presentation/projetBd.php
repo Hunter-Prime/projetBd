@@ -40,6 +40,7 @@ function GetBasePath($param = null) {
 } 
 
 
+
 $_SESSION['chemin'] = GetBasePath(GetBasePath());
 include_once($_SESSION['chemin']."/metier/Systeme.class.php");
 
@@ -92,10 +93,9 @@ include_once($_SESSION['chemin']."/metier/Systeme.class.php");
 				connect = document.getElementById("connect");
 				connect.innerHTML = "";
 				//faire en sorte que le rechargement de la page laisse afficher la ligne suivante
-				textNode = document.createTextNode("bonjour " + ident +", vous etes connecté, en tant que " + type);
+				textNode = document.createTextNode("" + ident);
 				if(type == "administrateur")
 					document.getElementById("listBd").style.display = "block";
-					document.getElementById("corpRecherche").style.display = "block";
 				connect.appendChild(textNode);
 			}
 
@@ -122,9 +122,12 @@ include_once($_SESSION['chemin']."/metier/Systeme.class.php");
 		<div id="location" <?php echo $choice;?>><button id="CIE" name="location" onclick="setLocation(this)">CIE</button><button id="home" name="location" onclick="setLocation(this)">chez toi</button></div>
 		<div id="connect" class="body" <?php if($choice == ''){
 														echo $noChoice;
+													} elseif($_SESSION['connexion']) {
+														echo $forConnect;
 													} else {
 														echo $forNotConnect;
-													}?>> <?php if($_SESSION['connexion']){
+													}?>> <?php 
+													if($_SESSION['connexion']){
 																	echo $_SESSION['user'];
 																} else {
 																	echo "visiteur";
