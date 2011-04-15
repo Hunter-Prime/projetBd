@@ -1,0 +1,8 @@
+.ui-tabs .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a {
+	cursor: pointer;
+	width: 256px;
+	text-align: center;
+}
+.ui-tabs .ui-tabs-nav{
+	padding-left: 77px;
+}

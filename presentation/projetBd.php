@@ -1,30 +1,33 @@
 <!-- dans la variable de session logged, indique si le connecté est client ou administrateur-->
 <?php session_start();
 #unset($_SESSION['connexion']);
-if(!isset($_SESSION['connexion'])){
-	$_SESSION['connexion'] = false;
-	$_SESSION['logged'] = 'visiteur';
+
+#var_dump($_SESSION['connexion']);
+$choice = 'style="display: none;"';
+$noChoice = '';
+if(!isset($_SESSION['systeme'])){
+	$choice = '';
+	$noChoice = 'style="display: none;"';
 }
-var_dump($_SESSION['connexion']);
+if(!isset($_SESSION['connexion'])){
+		$_SESSION['connexion'] = false;
+}
+
 if($_SESSION['connexion']){
 	$forConnect = '';
 	$forNotConnect = 'style="display: none;"';
 } else {
 	$forConnect = 'style="display: none;"';
 	$forNotConnect = '';
+	$_SESSION['logged'] = 'visiteur';
 }
-$choice = '';
-$noChoice = 'style="display: none;"';
-if(isset($_SESSION['systeme'])){
-	$choice = 'style="display: none;"';
-	$noChoice = '';
-}
-
 if($_SESSION['logged']=='admin'){
 	$style = '';
 } else {
 	$style = 'style="display: none;"';
 }
+
+
 //sur windows enlever /private
   //echo strrchr($_SERVER['SCRIPT_FILENAME'], "/")."<br/>";
   
@@ -45,8 +48,10 @@ include_once($_SESSION['chemin']."/metier/Systeme.class.php");
 	<head>
 		<title>projet base de données</title>
 		<link rel="stylesheet" href="../script/jquery-ui/css/ui-lightness/jquery-ui-1.8.11.custom.css" type="text/css"/>
+		<link rel="stylesheet" href="./css/style.css"/>
 		<script type="text/javascript" src="../script/jquery-ui/js/jquery-1.5.1.min.js"></script>
 		<script type="text/javascript" src="../script/jquery-ui/js/jquery-ui-1.8.11.custom.min.js"></script>
+		<script type="text/javascript" src="../script/jquery-ui/js/jquery.cookie.js"></script>
 		<script type="text/javascript">
 			function getXMLHttpRequest() {
 				var xhr = null;
@@ -106,7 +111,9 @@ include_once($_SESSION['chemin']."/metier/Systeme.class.php");
 			}
 			
 			$(function() {
-				$("#menuBar").tabs();
+				$("#menuBar").tabs({
+					cookie: {}
+				});
 			});
 		</script>
 	</head>
