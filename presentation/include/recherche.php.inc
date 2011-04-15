@@ -1,19 +1,16 @@
 			<form action="" method="POST">
 				<div id="rechercheMot">
+					recherche<br/>
 					<?php
-					if(!isset($_POST['parMot'])){
-						echo 'recherche par mots<input type="text" name="parMot"/>';
-					} else {
-						echo 'recherche par mots<input type="text" name="parMot" value="'.$_POST['parMot'].'"/>';
-					}
+						echo '<input type="text" name="parMot" value="'.$_POST['parMot'].'"/>';
 					?>
 				</div>
 				<div id="rechercheClasse">
-					recherche par classe : 
-					<select id="selectClasse">
+					<select id="selectClasse" name="selectClasse">
+						<option value=''>recherche globale</option>
 					<?php
 						$sys = unserialize($_SESSION['systeme']);
-						var_dump($sys);
+#						var_dump($sys);
 						echo $sys->getClasse();
 					?>
 					</select>
@@ -23,3 +20,9 @@
 					<input type="reset" value="raz"/>
 				</div>
 			</form>
+			<?php 
+				if(!isset($_POST['parMot'])){
+					$_POST['parMot'] = '';
+				}
+				echo $sys->recherche($_POST['parMot'], $_POST['selectClasse']);
+			?>

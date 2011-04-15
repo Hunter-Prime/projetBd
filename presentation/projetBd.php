@@ -120,8 +120,21 @@ include_once($_SESSION['chemin']."/metier/Systeme.class.php");
 	
 	<body>
 		<div id="location" <?php echo $choice;?>><button id="CIE" name="location" onclick="setLocation(this)">CIE</button><button id="home" name="location" onclick="setLocation(this)">chez toi</button></div>
-		<div id="connect" class="body" <?php echo $forNotConnect;?>> vous n'etes pas connecté </div>
-		<div id="authentification" class="body" <?php echo $forNotConnect;?>>
+		<div id="connect" class="body" <?php if($choice == ''){
+														echo $noChoice;
+													} else {
+														echo $forNotConnect;
+													}?>> <?php if($_SESSION['connexion']){
+																	echo $_SESSION['user'];
+																} else {
+																	echo "visiteur";
+																}
+													?> </div>
+		<div id="authentification" class="body" <?if($choice == ''){
+														echo $noChoice;
+													} else {
+														echo $forNotConnect;
+													}?>>
 			<label for="user"> utilisateur </label> <input type="text" id="user" name="utilisateur"/><br/>
 			<label for="mdp"> mot de passe </label> <input type="password" id="mdp" name="motdepasse"/><br/>
 			<button type="button" onclick=connexion();> connexion </button><br/>
