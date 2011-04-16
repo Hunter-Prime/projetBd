@@ -23,4 +23,5 @@
 				if(isset($_POST['parMot'])){
 					echo $sys->recherche($_POST['parMot'], $_POST['selectClasse']);
 				}
+				var_dump($_SESSION['recherche']);
 			?>

@@ -52,8 +52,13 @@ class Systeme{
 						<th>nom du produit</th><th>quantie restante</th><th>prix</th>
 					</tr>'
 					;
+		$cpt = 0;
 		while($row = mysql_fetch_assoc($query)){
-			$res .= '<tr><td>'.$row['nomproduit'].'</td><td>'.$row['qterestante'].'</td><td>'.$row['prix'].'</td><td><span class="imgPanier"><img src="./images/panier.jpg" alt="ajouter au panier"/></span></td></tr>';
+			$res .= '<tr><td>'.$row['nomproduit'].'</td><td>'.$row['qterestante'].'</td><td>'.$row['prix'].'</td><td><span id="'.$cpt.'" class="imgPanier" onclick=ajouterPanier(this.id);><img src="./images/panier.jpg" alt="ajouter au panier"/></span></td></tr>';
+			$_SESSION['recherche'][] = array("nomproduit" => $row['nomproduit'],
+											 "qterestante" => $row['qterestante'],
+											 "prix" => $row['prix']);
+			$cpt++;
 		}
 		$res .= '</table>';
 #		var_dump($res);

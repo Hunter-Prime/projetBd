@@ -27,6 +27,8 @@ if($_SESSION['logged']=='admin'){
 	$style = 'style="display: none;"';
 }
 
+$_SESSION['recherche'] = array();
+$_SESSION['panier'] = array();
 
 //sur windows enlever /private
   //echo strrchr($_SERVER['SCRIPT_FILENAME'], "/")."<br/>";
@@ -57,7 +59,39 @@ include_once($_SESSION['chemin']."/metier/Systeme.class.php");
 		<script type="text/javascript" src="../script/connexion.js"></script>
 		<script type="text/javascript" src="../script/location.js"></script>
 		<script type="text/javascript" src="../script/initObjectJQuery.js"></script>
-	</head>
+		<script type="text/javascript">
+		
+			function ajouterPanier(indice){
+				var xhr = getXMLHttpRequest();
+				xhr.open("GET", '../metier/ajax/panier.xml.php?indice=' + indice, false);
+				xhr.send(null);
+				var data = xhr.responseXML;
+				
+				var nomproduit, dialog, td, div, span;
+				nomproduit = data.getElementsByTagName("item");
+				nomproduit = nomproduit[0].getAttribute("nomproduit");
+				dialog = document.getElementById("dialog-confirm");
+				td = dialog.getElementsByTagName("td")[0];
+				div = document.createElement("div");
+				div.style.marginLeft = '16px';
+				div.style.fontSize = '14px';
+				div.style.fontWeight = 'bold';
+				div.appendChild(document.createTextNode(nomproduit));
+				td.appendChild(div);
+				
+				div = document.createElement("div");
+				div.style.marginLeft = '16px';
+				div.appendChild(document.createTextNode("Cet article a bien été ajouté à votre panier."));
+				td.appendChild(div);
+				
+				div = document.createElement("div");
+				span = document.createElement("span");
+				span.style.color = 'rgb(27,96,167)';
+				
+				
+			}
+		
+		</script>
 	
 	<body>
 		<div id="location" <?php echo $choice;?>><button id="CIE" name="location" onclick="setLocation(this)">CIE</button><button id="home" name="location" onclick="setLocation(this)">chez toi</button></div>
@@ -104,6 +138,18 @@ include_once($_SESSION['chemin']."/metier/Systeme.class.php");
 			<div id="commande">
 				<p>commande</p>
 			</div>
+		</div>
+		
+		<div id="dialog-confirm" title="panier">
+			<p>
+				<table>
+					<tbody>
+						<tr>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</p>
 		</div>
 		
 	</body>
