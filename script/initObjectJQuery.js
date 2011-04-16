@@ -1,0 +1,5 @@
+$(function() {
+	$("#menuBar").tabs({
+		cookie: {}
+	});
+});

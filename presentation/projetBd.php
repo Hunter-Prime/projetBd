@@ -53,69 +53,10 @@ include_once($_SESSION['chemin']."/metier/Systeme.class.php");
 		<script type="text/javascript" src="../script/jquery-ui/js/jquery-1.5.1.min.js"></script>
 		<script type="text/javascript" src="../script/jquery-ui/js/jquery-ui-1.8.11.custom.min.js"></script>
 		<script type="text/javascript" src="../script/jquery-ui/js/jquery.cookie.js"></script>
-		<script type="text/javascript">
-			function getXMLHttpRequest() {
-				var xhr = null;
-				if(xhr && xhr.readyState != 0){
-					alert("requete en cours, patientez!");
-					return;
-				}
-				if (window.XMLHttpRequest || window.ActiveXObject) {
-					if (window.ActiveXObject) {//...pour internet explorer...
-						try {
-							xhr = new ActiveXObject("Msxml2.XMLHTTP");
-						} catch(e) {
-							xhr = new ActiveXObject("Microsoft.XMLHTTP");
-						}
-					} else {//...pour firefox
-						xhr = new XMLHttpRequest(); 
-					}
-				} else {
-					alert("Votre navigateur ne supporte pas l'objet XMLHTTPRequest...");
-					return null;
-				}
-				return xhr;
-			}
-		
-			function connexion(){
-				var xhr = getXMLHttpRequest();
-				var login = document.getElementById("user").value;
-				var password = document.getElementById("mdp").value;
-				xhr.open("GET", '../metier/ajax/connexion.xml.php?login='+login+'&password='+password, false);
-				xhr.send(null);
-				var data = xhr.responseXML;
-				var user, connect, textNode, type, ident;
-				
-				user = data.getElementsByTagName("item");
-				ident = user[0].getAttribute("user");
-				type = user[0].getAttribute("type");
-				document.getElementById("authentification").style.display = "none";
-				connect = document.getElementById("connect");
-				connect.innerHTML = "";
-				//faire en sorte que le rechargement de la page laisse afficher la ligne suivante
-				textNode = document.createTextNode("" + ident);
-				if(type == "administrateur")
-					document.getElementById("listBd").style.display = "block";
-				connect.appendChild(textNode);
-			}
-
-			function setLocation(element){
-				var xhr = getXMLHttpRequest();
-				xhr.open("GET", '../metier/ajax/setLocation.php?id=' + element.id, false);
-				xhr.send(null);
-				document.getElementById("location").style.display="none";
-				var body = document.getElementsByClassName("body");
-				for(i = 0; i<body.length; i++){
-					body[i].style.display = "block";
-				}
-			}
-			
-			$(function() {
-				$("#menuBar").tabs({
-					cookie: {}
-				});
-			});
-		</script>
+		<script type="text/javascript" src="../script/XMLHttpRequest.js"></script>
+		<script type="text/javascript" src="../script/connexion.js"></script>
+		<script type="text/javascript" src="../script/location.js"></script>
+		<script type="text/javascript" src="../script/initObjectJQuery.js"></script>
 	</head>
 	
 	<body>
