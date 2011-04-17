@@ -5,3 +5,5 @@ lorsqu'une modification à été faite, sur le terminal tapez : git commit -a -m
 lorsque vous voulez envoyer les modifications de l'index sur github, sur le terminal tapez : 'git push'
 
 lorsque qu'une modification par une tierce personne à été effectuer, vous pouvez récuperer ses modifications en utilisant la commande : 'git pull'
+
+lol
